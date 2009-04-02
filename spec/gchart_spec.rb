@@ -391,7 +391,7 @@ describe "a map chart" do
     @geographical_area = 'usa'
     @map_colors = ['FFFFFF', 'FF0000', 'FFFF00', '00FF00']
     @country_codes = ['MT', 'WY', "ID", 'SD']
-    @chart = Gchart.map(:data => @data, :encoding => 'text', :size => '400x300', 
+    @chart = Gchart.map(:data => @data, :encoding => 'text', :size => '400x220', 
       :geographical_area => @geographical_area, :map_colors => @map_colors,
       :country_codes => @country_codes)
   end
@@ -416,6 +416,43 @@ describe "a map chart" do
     @chart.include?('chd=t:0,100,50,32').should be_true
   end
   
+end
+
+describe "a map chart (google example)" do
+  before(:each) do
+    @data = [0,100,50,32,60,40,43,12,14,54,98,17,70,76,18,29]
+    @geographical_area = 'africa'
+    @map_colors = 'FFFFFF,FF0000,FFFF00,00FF00'
+    @country_codes = 'DZEGMGAOBWNGCFKECGCVSNDJTZGHMZZM'
+    @background_color = 'EAF7FE'
+    @chart = Gchart.map(:data => @data, :encoding => 'text', :size => '440x220', 
+      :geographical_area => @geographical_area, :map_colors => @map_colors,
+      :country_codes => @country_codes, :bg => @background_color)
+  end
+  
+  it "should create a map" do
+    @chart.include?('cht=t').should be_true
+  end
+  
+  it "should set the geographical area" do
+    @chart.include?('chtm=africa').should be_true
+  end
+  
+  it "should set the map colors" do
+    @chart.include?('chco=FFFFFF,FF0000,FFFF00,00FF00').should be_true
+  end
+  
+  it "should set the country/state codes" do
+    @chart.include?('chld=DZEGMGAOBWNGCFKECGCVSNDJTZGHMZZM').should be_true
+  end
+  
+  it "should set the chart data" do
+    @chart.include?('chd=t:0,100,50,32,60,40,43,12,14,54,98,17,70,76,18,29').should be_true
+  end
+  
+  it "should set the background color" do
+    @chart.include?('chf=bg,s,EAF7FE').should be_true
+  end
 end
 
 describe 'exporting a chart' do
