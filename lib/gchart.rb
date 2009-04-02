@@ -17,7 +17,7 @@ class Gchart
   
   attr_accessor :title, :type, :width, :height, :horizontal, :grouped, :legend, :data, :encoding, :max_value, :bar_colors,
                 :title_color, :title_size, :custom, :axis_with_labels, :axis_labels, :bar_width_and_spacing, :id, :alt, :class,
-                :range_markers, :geographical_area, :map_colors, :country_codes
+                :geographical_area, :map_colors, :country_codes
     
   # Support for Gchart.line(:title => 'my title', :size => '400x600')
   def self.method_missing(m, options={})
@@ -221,21 +221,6 @@ class Gchart
     "chbh=#{width_and_spacing_values}"
   end
   
-  def set_range_markers
-    markers = case @range_markers
-    when Hash
-      set_range_marker(@range_markers)
-    when Array
-      range_markers.collect{|marker| set_range_marker(marker)}.join('|')
-    end
-    "chm=#{markers}"
-  end
-  
-  def set_range_marker(options)
-    orientation = ['vertical', 'Vertical', 'V', 'v', 'R'].include?(options[:orientation]) ? 'R' : 'r'
-    "#{orientation},#{options[:color]},0,#{options[:start_position]},#{options[:stop_position]}#{',1' if options[:overlaid?]}"  
-  end
-  
   def fill_for(type=nil, color='', angle=nil)
     unless type.nil? 
       case type
@@ -427,8 +412,6 @@ class Gchart
         set_axis_with_labels
       when '@axis_labels'
         set_axis_labels
-      when '@range_markers'
-        set_range_markers
       when '@geographical_area'
         set_geographical_area
       when '@country_codes'

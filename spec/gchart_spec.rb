@@ -138,53 +138,6 @@ describe "generating different type of charts" do
   
 end
 
-
-describe "range markers" do
-
-  it "should be able to generate given a hash of range-marker options" do
-    Gchart.line(:range_markers => {:start_position => 0.59, :stop_position => 0.61, :color => 'ff0000'}).include?('chm=r,ff0000,0,0.59,0.61').should be_true
-  end
-  
-  it "should be able to generate given an array of range-marker hash options" do
-    Gchart.line(:range_markers => [
-          {:start_position => 0.59, :stop_position => 0.61, :color => 'ff0000'}, 
-          {:start_position => 0, :stop_position => 0.6, :color => '666666'}, 
-          {:color => 'cccccc', :start_position => 0.6, :stop_position => 1}
-        ]).include?(Gchart.jstize('r,ff0000,0,0.59,0.61|r,666666,0,0,0.6|r,cccccc,0,0.6,1')).should be_true
-  end
-  
-  it "should allow a :overlaid? to be set" do
-    Gchart.line(:range_markers => {:start_position => 0.59, :stop_position => 0.61, :color => 'ffffff', :overlaid? => true}).include?('chm=r,ffffff,0,0.59,0.61,1').should be_true
-    Gchart.line(:range_markers => {:start_position => 0.59, :stop_position => 0.61, :color => 'ffffff', :overlaid? => false}).include?('chm=r,ffffff,0,0.59,0.61').should be_true
-  end
-  
-  describe "when setting the orientation option" do
-    before(:each) do
-      options = {:start_position => 0.59, :stop_position => 0.61, :color => 'ff0000'}
-    end
-    
-    it "to vertical (R) if given a valid option" do
-      Gchart.line(:range_markers => options.merge(:orientation => 'v')).include?('chm=R').should be_true
-      Gchart.line(:range_markers => options.merge(:orientation => 'V')).include?('chm=R').should be_true
-      Gchart.line(:range_markers => options.merge(:orientation => 'R')).include?('chm=R').should be_true
-      Gchart.line(:range_markers => options.merge(:orientation => 'vertical')).include?('chm=R').should be_true
-      Gchart.line(:range_markers => options.merge(:orientation => 'Vertical')).include?('chm=R').should be_true
-    end
-    
-    it "to horizontal (r) if given a valid option (actually anything other than the vertical options)" do
-      Gchart.line(:range_markers => options.merge(:orientation => 'horizontal')).include?('chm=r').should be_true
-      Gchart.line(:range_markers => options.merge(:orientation => 'h')).include?('chm=r').should be_true
-      Gchart.line(:range_markers => options.merge(:orientation => 'etc')).include?('chm=r').should be_true
-    end
-
-    it "if left blank defaults to horizontal (r)" do    
-      Gchart.line(:range_markers => options).include?('chm=r').should be_true
-    end
-  end
-
-end
-
-
 describe "a bar graph" do
   
   it "should have a default vertical orientation" do
