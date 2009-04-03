@@ -17,7 +17,7 @@ class Gchart
   
   attr_accessor :title, :type, :width, :height, :horizontal, :grouped, :legend, :data, :encoding, :max_value, :bar_colors,
                 :title_color, :title_size, :custom, :axis_with_labels, :axis_labels, :bar_width_and_spacing, :id, :alt, :class,
-                :geographical_area, :map_colors, :country_codes
+                :geographical_area, :country_codes
     
   # Support for Gchart.line(:title => 'my title', :size => '400x600')
   def self.method_missing(m, options={})
