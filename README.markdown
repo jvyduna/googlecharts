@@ -1,4 +1,4 @@
-The goal of this Gem is to make the creation of Google Charts a simple and easy task.
+ The goal of this Gem is to make the creation of Google Charts a simple and easy task.
 
     Gchart.line(  :size => '200x300', 
                   :title => "example title",
@@ -27,6 +27,7 @@ This gem supports the following types of charts:
   * pie
   * pie_3d
   * google meter
+  * map
   
 Googlecharts also supports graphical themes and you can easily load your own.
 
@@ -243,6 +244,31 @@ Sparklines:
 
 A sparkline chart has exactly the same parameters as a line chart. The only difference is that the axes lines are not drawn for sparklines by default.
   
+Maps:
+-------------
+
+Map charts can accept options to set the geographical region, country (or state) codes, and map colors. To set country codes and map colors, you can provide a string or an array. 
+
+To set map color choose a default color (applied to all countries without data) and a start and stop gradient color.  The country with the lowest data value will have the start color, the country with the highest data value the end color.  All countries with data values between will colored along the gradient. You can add additional colors between the start and end to modify the gradient. :map_colors => [&lt;default country color&gt;, &lt;start gradient color&gt;, &lt;end gradient color&gt;]
+
+The geographical region can be set to the following:
+
+  * africa
+  * asia
+  * europe
+  * middle_east
+  * south_america
+  * usa
+  * world
+ 
+The country codes (:country_codes) can be set to [ISO3166 country codes](http://code.google.com/apis/chart/isocodes.html), or [US State Codes](http://code.google.com/apis/chart/statecodes.html)
+
+    Gchart.map(:geographical_area => 'usa', :map_colors => ['FFFFFF', 'FF0000', 'FFFF00', '00FF00'],
+               :country_codes => ['MT', 'NY', 'OH', 'WY']
+               :data => [25, 50, 75, 100], :encoding => 'text', :size => '440x220', 
+               :bg => 'EAF7FE')
+
+NOTE: maps are limited to a maximum chart size of 440x220 pixels.
 
 Google-o-meter
 -------------
