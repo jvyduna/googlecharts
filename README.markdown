@@ -261,10 +261,10 @@ The geographical region can be set to the following:
   * usa
   * world
  
-The country codes (:country_codes) can be set to [ISO3166 country codes](http://code.google.com/apis/chart/isocodes.html), or [US State Codes](http://code.google.com/apis/chart/statecodes.html)
+The country codes (:country_codes) can be set to [ISO3166 country codes](http://code.google.com/apis/chart/isocodes.html), or [US State Codes](http://code.google.com/apis/chart/statecodes.html).
 
     Gchart.map(:geographical_area => 'usa', :map_colors => ['FFFFFF', 'FF0000', 'FFFF00', '00FF00'],
-               :country_codes => ['MT', 'NY', 'OH', 'WY']
+               :country_codes => ['MT', 'NY', 'OH', 'WY'],
                :data => [25, 50, 75, 100], :encoding => 'text', :size => '440x220', 
                :bg => 'EAF7FE')
 
